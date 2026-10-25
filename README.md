@@ -1,4 +1,4 @@
-# pong-godot
+
 # Pong
 
 Classic Pong with 3 AI difficulty levels (Easy, Medium, Extreme), built in Godot 4 with GDScript. Beat the AI to 5 points.
