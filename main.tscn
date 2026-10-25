@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://b821myv7hqira"]
+
+[ext_resource type="PackedScene" uid="uid://d4j7xe1qi3tfu" path="res://paddle.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://de78u6sepvyir" path="res://ball.tscn" id="2_0xm2m"]
+[ext_resource type="AudioStream" uid="uid://ycbh0wym5ena" path="res://hit.ogg" id="3_7mycd"]
+[ext_resource type="Script" uid="uid://bwsmypjmh76p4" path="res://ai_paddle.gd" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://pfhalwponqqw" path="res://pause_controller.gd" id="4_1bvp3"]
+[ext_resource type="AudioStream" uid="uid://bpcmcnvhoy43i" path="res://score.ogg" id="4_272bh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_akl23"]
+size = Vector2(1152, 20)
+
+[node name="Node2D" type="Node2D" unique_id=1813364016]
+
+[node name="Paddle" parent="." unique_id=1247835497 instance=ExtResource("1_ig7tw")]
+position = Vector2(100, 324)
+
+[node name="Ball" parent="." unique_id=851831592 instance=ExtResource("2_0xm2m")]
+
+[node name="HitSound" type="AudioStreamPlayer" parent="Ball" unique_id=1145198744]
+stream = ExtResource("3_7mycd")
+volume_db = -10.0
+
+[node name="ScoreSound" type="AudioStreamPlayer" parent="Ball" unique_id=144312629]
+stream = ExtResource("4_272bh")
+volume_db = -10.0
+
+[node name="WallTop" type="StaticBody2D" parent="." unique_id=1815525937]
+position = Vector2(576, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop" unique_id=1098205072]
+shape = SubResource("RectangleShape2D_akl23")
+
+[node name="WallBottom" type="StaticBody2D" parent="." unique_id=90865449]
+position = Vector2(576, 658)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallBottom" unique_id=883212372]
+shape = SubResource("RectangleShape2D_akl23")
+
+[node name="Paddle2" parent="." unique_id=722835189 instance=ExtResource("1_ig7tw")]
+position = Vector2(1052, 324)
+script = ExtResource("3_h2yge")
+
+[node name="ScoreLeft" type="Label" parent="." unique_id=2072246153]
+offset_left = 400.0
+offset_top = 20.0
+offset_right = 440.0
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 48
+text = "0
+"
+
+[node name="ScoreRight" type="Label" parent="." unique_id=1392481897]
+offset_left = 720.0
+offset_top = 20.0
+offset_right = 760.0
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 48
+text = "0
+"
+
+[node name="GameOverLabel" type="Label" parent="." unique_id=509891389]
+offset_left = 400.0
+offset_top = 250.0
+offset_right = 440.0
+offset_bottom = 273.0
+theme_override_font_sizes/font_size = 48
+
+[node name="PauseLabel" type="Label" parent="." unique_id=1342673386]
+visible = false
+offset_left = 480.0
+offset_top = 280.0
+offset_right = 542.0
+offset_bottom = 329.0
+theme_override_font_sizes/font_size = 32
+text = "PAUSED
+Esc = resume
+R = restart
+
+"
+
+[node name="PauseController" type="Node" parent="." unique_id=2089285427]
+process_mode = 3
+script = ExtResource("4_1bvp3")
